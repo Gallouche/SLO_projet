@@ -3,7 +3,7 @@
 --
 -- Données de la base de données du projet BDR 2016-2017.
 
-USE BDR_ELISEI_TCHENTE_TRUAN;
+USE slo_schema;
 
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET NAMES 'cp1250';

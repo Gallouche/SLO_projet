@@ -3,7 +3,7 @@
 --
 -- Triggers et views du projet BDR 2016-2017.
 
-USE BDR_ELISEI_TCHENTE_TRUAN;
+USE slo_schema;
 
 SET NAMES 'cp1250';
 SET CHARSET 'utf8';

@@ -19,6 +19,7 @@ fi
 SCHEMA_FILE=sql/schema.sql
 DATA_FILE=sql/data.sql
 VIEWS_FILE=sql/triggers_views.sql
+USERS_FILE=sql/slo.sql
 
 echo -n "Applying database schema... "
 mysql --host=$RDS_HOSTNAME --user=$RDS_USERNAME --password=$RDS_PASSWORD < $SCHEMA_FILE
@@ -28,3 +29,7 @@ echo -n "Applying data... "
 mysql --host=$RDS_HOSTNAME --user=$RDS_USERNAME --password=$RDS_PASSWORD --database=$RDS_DATABASE < $VIEWS_FILE
 mysql --host=$RDS_HOSTNAME --user=$RDS_USERNAME --password=$RDS_PASSWORD --database=$RDS_DATABASE < $DATA_FILE
 echo "Data applied!"
+
+echo -n "Applying users... "
+mysql --host=$RDS_HOSTNAME --user=$RDS_USERNAME --password=$RDS_PASSWORD --database=$RDS_DATABASE < $USERS_FILE
+echo "Users applied!"
