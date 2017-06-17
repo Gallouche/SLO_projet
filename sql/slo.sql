@@ -15,7 +15,7 @@ DROP DATABASE IF EXISTS test;
 -- Create 'users' table.
 USE slo_schema;
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(32) NOT NULL,
   `hash` varchar(128) NOT NULL,
   `salt` varchar(32) NOT NULL,

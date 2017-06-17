@@ -1,0 +1,30 @@
+<center>
+    <h4 class="bottom-separator">Login</h4>
+</center>
+
+<!-- Show error if there is one -->
+<div class="alert callout" ng-show="error && !success">
+    <center>
+        <span ng-bind-html="error"></span>
+    </center>
+</div>
+
+<br ng-hide="error || success">
+
+<form ng-submit="logIn()" ng-hide="success">
+    <input type="text" placeholder="Username" ng-model="user.username">
+    <input type="password" placeholder="Password" ng-model="user.password">
+    <br>
+    <center>
+        <button class="button">Login</button>
+    </center>
+</form>
+
+<!-- Show success -->
+<div ng-show="success">
+    <center>
+        <h3 ng-bind-html="success"></h3>
+        <br>
+        <i class="fi-like" style="font-size: 42px; color: #4F8A10; cursor: pointer;" ng-click="closeThisDialog()"></i>
+    </center>
+</div>

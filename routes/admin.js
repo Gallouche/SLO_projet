@@ -11,6 +11,10 @@ var connection = mysql.createConnection(config.mysql_conn);
 var router = express.Router();
 
 router.post('/:id/addShop', auth, function(req, res, next) {
+    if (!req.payload.admin) {
+        return res.status(403);
+    }
+
     var shop = req.body;
     shop.horaire = 1;
     shop.filename_image = 'shop_default.png';
@@ -51,6 +55,10 @@ router.post('/:id/addShop', auth, function(req, res, next) {
 });
 
 router.delete('/deleteShop/:id', auth, function(req, res, next) {
+    if (!req.payload.admin) {
+        return res.status(403);
+    }
+
     var id_shop = req.params.id;
 
     var query = 'DELETE FROM enseigne WHERE id_enseigne = ' + id_shop;
@@ -65,6 +73,10 @@ router.delete('/deleteShop/:id', auth, function(req, res, next) {
 });
 
 router.get('/:id/view/:view', auth, function(req, res, next) {
+    if (!req.payload.admin) {
+        return res.status(403);
+    }
+
     var id = req.params.id;
     var view = req.params.view;
 
@@ -78,6 +90,10 @@ router.get('/:id/view/:view', auth, function(req, res, next) {
 });
 
 router.put('/:id_centre/local/:id_local/cost/:cost', auth, function(req, res, next) {
+    if (!req.payload.admin) {
+        return res.status(403);
+    }
+    
     var id_centre = req.params.id_centre;
     var id_local = req.params.id_local;
     var cost = req.params.cost;

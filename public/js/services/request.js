@@ -1,13 +1,19 @@
 angular.module('BDR')
-    .factory('request', ['$http', '$q', function($http, $q) {
+    .factory('request', ['$http', '$q', 'auth', function($http, $q, auth) {
 
         const API = '/api';
+
+        const headers = {
+            headers: {
+                Authorization: 'Bearer ' + auth.getToken()
+            }
+        };
 
         return {
             delete: function(url) {
                 var defer = $q.defer();
 
-                $http.delete(API + url).then(
+                $http.delete(API + url, headers).then(
                     function(res) {
                         defer.resolve(res.data);
                     },
@@ -22,7 +28,7 @@ angular.module('BDR')
             get: function(url) {
                 var defer = $q.defer();
 
-                $http.get(API + url).then(
+                $http.get(API + url, headers).then(
                     function(res) {
                         defer.resolve(res.data);
                     },
@@ -37,7 +43,7 @@ angular.module('BDR')
             post: function(url, obj) {
                 var defer = $q.defer();
 
-                $http.post(API + url, obj).then(
+                $http.post(API + url, obj, headers).then(
                     function(res) {
                         defer.resolve(res.data);
                     },
@@ -52,7 +58,7 @@ angular.module('BDR')
             put: function(url, obj) {
                 var defer = $q.defer();
 
-                $http.put(API + url, obj).then(
+                $http.put(API + url, obj, headers).then(
                     function(res) {
                         defer.resolve(res.data);
                     },

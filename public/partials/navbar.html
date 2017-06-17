@@ -13,8 +13,14 @@
     </div>
     <div class="top-bar-right">
         <ul class="menu">
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" ng-show="currentUser().admin">
                 <a ui-sref="admin">Administration</a>
+            </li>
+            <li ng-hide="isLoggedIn()">
+                <a ng-click="showLogIn()">Se connecter</a>
+            </li>
+            <li ng-show="isLoggedIn()">
+                <a ng-click="disconnect()">Se déconnecter</a>
             </li>
             <li>
                 <a ng-click="logOut()">Quitter</a>

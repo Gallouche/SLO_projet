@@ -79,7 +79,6 @@ angular.module('BDR')
                 },
                 function(err) {
                     defer.reject(err);
-                    throw new Error();
                 }
             );
 
