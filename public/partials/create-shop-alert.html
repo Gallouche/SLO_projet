@@ -1,0 +1,26 @@
+<form ng-submit="addShop() && closeThisDialog()">
+    <label>Nom enseigne</label>
+    <input type="text" ng-model="newShop.nom" />
+
+    <label>Emplacement local</label>
+    <select ng-model="newShop.local">
+        <option ng-repeat="local in locaux_libres" value="{{ local.emplacement }}">{{ local.emplacement }}</option>
+    </select>
+
+    <label>Type d'enseigne</label>
+    <select ng-model="newShop.type">
+        <option value="0">Magasin</option>
+        <option value="1">Restaurant</option>
+        <option value="2">Service</option>
+    </select>
+
+    <label>Description</label>
+    <input type="text" ng-model="newShop.type_enseigne" />
+
+    <div ng-show="newShop.type === '1'">
+        <label>Nombre de places</label>
+        <input type="text" ng-model="newShop.nb_places" />
+    </div>
+
+    <button type="submit" class="button">Créer enseigne</button>
+</form>

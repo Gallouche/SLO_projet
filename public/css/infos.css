@@ -1,0 +1,21 @@
+.infos-content .parking {
+    border-color: #E4E4E4;
+    border-style: solid;
+    border-width: 1px;
+
+    height: 100px;
+
+    font-size: 30px;
+}
+
+.infos-content .parking .places {
+    color: #00CC00;
+}
+
+.infos-content .parking .refresh {
+    position: relative;
+
+    bottom: 0;
+
+    font-size: 14px;
+}

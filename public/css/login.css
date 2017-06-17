@@ -1,0 +1,27 @@
+.login-content form {
+    background-color: #2199E8;
+
+    box-shadow: 0 0 5px #1685D0;
+
+    margin-top: 80px;
+
+    padding: 40px;
+}
+
+.login-content form .alert {
+    color: #CB2027;
+}
+
+.login-content form .button {
+    border-color: white;
+    border-style: solid;
+    border-width: 1px;
+
+    float: right;
+}
+
+.login-content form label {
+    color: white;
+
+    font-size: 18px;
+}

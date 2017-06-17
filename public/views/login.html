@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+
+<div class="row login-content">
+    <div class="blank"></div>
+
+    <div class="small-offset-2 small-8 medium-offset-3 medium-6 large-offset-3 large-6">
+        <form ng-submit="login()">
+            <label>Choisir un centre :
+                <select ng-model="id" required>
+                    <option ng-repeat="centre in centres" value="{{ centre.no_id }}">
+                        {{ centre.nom }} - {{ centre.adresse.ville }}
+                    </option>
+                </select>
+            </label>
+
+            <div ng-style="alertStyle" class="alert">
+                <center>
+                    <p>Vous devez sélectionner un centre commercial !</p>
+                </center>
+            </div>
+
+            <button class="button" type="submit">Choisir</button>
+            <div class="clear"></div>
+        </form>
+    </div>
+</div>

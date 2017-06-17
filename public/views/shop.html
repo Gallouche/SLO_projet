@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+
+<div class="row shop-content">
+    <div class="row page-header">
+        <img height="120" width="120" ng-src="{{ getLogoURL(shop) }}" >
+        <h2>{{ shop.nom }}</h2>
+        <small>{{ shop.typeName }}</small>
+    </div>
+
+    <div class="row">
+        <div class="informations small-12 medium-6 large-6 columns">
+            <h4 class="page-title">Informations</h4>
+            <table class="unstriped">
+                <thead></thead>
+                <tbody>
+                    <tr>
+                        <td><b>Emplacement</b></td>
+                        <td>{{ shop.emplacement_local }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Responsable</b></td>
+                        <td class="media-object middle" style="margin-top: 15px;">
+                            <div class="media-object-section middle">
+                                <img width="60" height="60" src="images/contact_default.png">
+                            </div>
+                            <div class="media-object-section middle">
+                                {{ shop.gerant.prenom }} {{ shop.gerant.nom }}
+                                <br />
+                                <i class="fi-mail">&nbsp;{{ shop.gerant.email }}</i>
+                                <br />
+                                <i class="fi-telephone">&nbsp;{{ shop.gerant.telephone }}</i>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="horaires small-12 medium-6 large-6 columns">
+            <h4 class="page-title">Horaires</h4>
+            <table>
+                <thead>
+                    <th>Jour</th>
+                    <th>Début</th>
+                    <th>Fin</th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="horaire in shop.horaires">
+                        <td>{{ horaire.jour }}</td>
+                        <td>
+                            <span ng-show="horaire.ouvert">
+                                {{ horaire.heure_debut }}
+                            </span>
+                            <span ng-hide="horaire.ouvert">
+                                <b>Fermé</b>
+                            </span>
+                        </td>
+                        <td>{{ horaire.heure_fin | date:'H'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div ng-show="shop.type === 1">
+        <h4 class="page-title">Disponibilité</h4>
+        <b>{{ shop.nb_tables_dispo }}</b> tables sont disponibles pour que nos clients puissent profiter pleinement de leur repas !
+    </div>
+
+
+</div>

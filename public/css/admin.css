@@ -1,0 +1,14 @@
+.admin-content .fi-pencil.right {
+    cursor: pointer;
+
+    float: right;
+}
+
+.admin-content .add-shop {
+    border-radius: 3px;
+
+    position: fixed;
+
+    bottom: 80px;
+    right: 80px;
+}

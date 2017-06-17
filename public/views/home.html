@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+
+<div class="row home-content">
+    <div class="page-header row">
+        <h2>{{ centre.nom }}</h2>
+        <small>{{ centre.slogan }}</small>
+    </div>
+
+    <div class="row">
+        Description, présentation rapide du centre commercial.
+    </div>
+
+    <div class="blank"></div>
+
+    <div class="row">
+        <div class="page-title">
+            <h3>Enseignes</h3>
+        </div>
+        <div class="row small-up-2 medium-up-4 large-up-4">
+            <div class="column column-block enseigne" ng-repeat="shop in centre.shops">
+                <a ui-sref="shop({id: shop.id_enseigne})">
+                    <img class="thumbnail" width="200" height="200" ng-src="{{ getLogoURL(shop) }}">
+                    <br>
+                    <span>{{ shop.nom }}</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
