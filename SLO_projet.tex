@@ -1,0 +1,150 @@
+\documentclass[a4paper]{article}
+\date{\today}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% ENCODAGES, LANGUES, AMS ET AUTRES 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\usepackage[T1]{fontenc} 
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[english,frenchb]{babel}
+%
+\frenchbsetup{StandardLists=true} 
+\usepackage{enumitem}
+\usepackage{xspace}
+\usepackage{amssymb,mathtools,pifont} 
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{trees}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% CODE HIGHLIGHTING 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\usepackage{listings}
+\definecolor{mymagenta}{rgb}{0.86,0.08,0.24}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\lstset{
+    language=java,
+    aboveskip=3mm,
+    belowskip=3mm,
+    showstringspaces=false,
+    columns=flexible,
+    basicstyle={\small\ttfamily},
+    numbers=left,
+    numberstyle=\tiny\color{mygray},
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{mygray},
+    stringstyle=\color{mygreen},
+    breaklines=true,
+    breakatwhitespace=false,
+    tabsize=3,
+    captionpos=b,
+    frame=trBL,
+    rulecolor=\color{gray},
+    literate=%Because listing does not support ut8..
+    {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+    {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+    {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+    {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+    {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+    {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+    {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+    {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+    {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+    {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+    {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+    {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+    {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+
+\renewcommand{\lstlistingname}{Code}
+\renewcommand{\lstlistlistingname}{Table des codes}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% MARGES, ENTÊTES ET PIEDS DE PAGE, TITRE
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\usepackage[hcentering=true,nomarginpar,textwidth=426.8pt,textheight=650.2pt,headheight=24pt]{geometry}
+
+\usepackage{fancyhdr}
+\fancypagestyle{plain}{
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\rightmark}
+\fancyhead[R]{ \raisebox{0.4cm}{\includegraphics[height=1.5cm,angle=-90]{img/logo-HEIG-VD.pdf}}}
+\fancyfoot[LO,RE]{\thepage}
+\fancyfoot[LE,RO]{Dispatcher -- Groupe \no 6}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+%%%%%%%
+%
+
+
+\begin{document}
+\thispagestyle{empty}
+
+%%%%%%%%%%%%%%%%%%%%%
+% Title Page
+%%%%%%%%%%%%%%%%%%%%%
+\begin{titlepage}
+\center
+
+    \vspace{1cm}
+    {\scshape\LARGE Projet SLO \\ 
+        \vspace{0.5cm}}
+
+    \vspace{0.5cm}
+    {\itshape Gallandat Théo \\ Elisei Lucas \\ Truan David\par}
+
+    \vspace{1cm}
+    \textbf{Professeur}\par
+    Pasini Sylvain\par
+    \vspace{3cm}
+
+    % Bottom of the page
+    {\large \today\par}
+    \vspace{3cm}
+    \includegraphics[height=3cm,angle=-90]{img/logo-HEIG-VD.pdf}
+\end{titlepage}
+\setcounter{page}{1}
+\section{Introduction}
+Lors de cette année en sécurité logiciel il nous a été demandé, dans le cadre du dernier laboratoire, de sécuriser une de nos application. Nous avons choisi notre projet de BDR réalisé le semestre précédent. Il s'agit d'un site web de gestion d'un centre commércial. Nous avons donc analyser les besoins sécuritaires requis pour rendre le site plus sécurisé.
+\section{Descritption du projet}
+Comme dit précédemment, notre projet se base sur un site web plutôt qu'une application. Nous avons choisi ce projet car, n'ayant pas de cours de sécurité web l'année prochaine, cela nous a semblé un bon moyen de se familiariser avec les problèmes sécuritaire du web, les plus exposés.\\
+Le projet réalisé en BDR consiste en un site web permettant la gestion d'un centre commercial, avec plusieurs enseignes. A l'heure actuelle, il dispose d'une section admin, mais cette dernière n'est pas sécurisée car il n'y a pas de système de login implémenté. Le but principale de ce projet sera donc de fournir un moyen d'authentification sécurisé permettant à une personne de se connecter en tant qu'administrateur. Par la suite, nous allons implémenter un SSL pour sécurisé la connexion au serveur et encrypté les paquets concernant le login.
+\section{Analyse des menaces}
+Dans cette partie, nous allons analyser les menaces potentielles auxquelles notre site est actuellement exposé.
+\subsection{DFD}
+\subsection{Menaces}
+\subsection{Scénarios}
+\section{Mesures sécuritaire}
+\subsection{Mise en place d'un systeme admin}
+\subsection{Mise en place d'un SSL}
+\section{Conclusion}
+
+
+\end{document}
