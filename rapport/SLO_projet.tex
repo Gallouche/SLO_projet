@@ -132,15 +132,75 @@
 \end{titlepage}
 \setcounter{page}{1}
 \section{Introduction}
-Lors de cette année en sécurité logiciel il nous a été demandé, dans le cadre du dernier laboratoire, de sécuriser une de nos application. Nous avons choisi notre projet de BDR réalisé le semestre précédent. Il s'agit d'un site web de gestion d'un centre commércial. Nous avons donc analyser les besoins sécuritaires requis pour rendre le site plus sécurisé.
+Lors de cette année en sécurité logiciel il nous a été demandé, dans le cadre du dernier laboratoire, de sécuriser une de nos application. Nous avons choisi notre projet de BDR réalisé le semestre précédent. Il s'agit d'un site web de gestion d'un centre commércial. Nous avons donc analyser les besoins sécuritaires requis pour rendre le site plus sécurisé.\\
+Il est à noter que la sécurisation d'un site web diffère de la sécurisation d'un logiciel classique mais que nous avons eu l'aval du professeur pour le faire car aucun des membre de notre groupe n'est en TR.
 \section{Descritption du projet}
-Comme dit précédemment, notre projet se base sur un site web plutôt qu'une application. Nous avons choisi ce projet car, n'ayant pas de cours de sécurité web l'année prochaine, cela nous a semblé un bon moyen de se familiariser avec les problèmes sécuritaire du web, les plus exposés.\\
-Le projet réalisé en BDR consiste en un site web permettant la gestion d'un centre commercial, avec plusieurs enseignes. A l'heure actuelle, il dispose d'une section admin, mais cette dernière n'est pas sécurisée car il n'y a pas de système de login implémenté. Le but principale de ce projet sera donc de fournir un moyen d'authentification sécurisé permettant à une personne de se connecter en tant qu'administrateur. Par la suite, nous allons implémenter un SSL pour sécurisé la connexion au serveur et encrypté les paquets concernant le login.
+Comme dit précédemment, notre projet se base sur un site web plutôt qu'une application. Nous avons choisi ce projet car, n'ayant pas de cours de sécurité web l'année prochaine, cela nous a semblé un bon moyen de nous familiariser avec les problèmes sécuritaire du web les plus exposés.\\
+Le projet réalisé en BDR consiste en un site web permettant la gestion d'un centre commercial, avec plusieurs enseignes. A l'heure actuelle, il dispose d'une section admin, mais cette dernière n'est pas sécurisée car il n'y a pas de système de login implémenté. Le but principale de ce projet sera donc de fournir un moyen d'authentification sécurisé permettant à une personne de se connecter en tant qu'administrateur. Cette authentification doit pouvoir restreindre l'accès/les pouvoirs sur la base de données à certains utilisateurs, ce qui n'est pas le cas actuellement
+
 \section{Analyse des menaces}
-Dans cette partie, nous allons analyser les menaces potentielles auxquelles notre site est actuellement exposé.
-\subsection{DFD}
+Dans cette partie, nous allons analyser les menaces potentielles auxquelles notre site est actuellement exposé.\\
+Pour l'instant le site n'est pas sécurisé car il n'y a pas de système d'authentification pour l'adminstration. De ce fait, tout le monde a accès aux données des employés (salaires, email, nom) et des données administrativesdes enseignes (coût/mois, superficie, ...).\\
+Du côté de la base de données, elle est basique et n'a pas de table permettant de stocker des utilisateurs.
+
+\begin{center}
+ \includegraphics[width=200px]{img/DFD_actuelle}
+\end{center}
+
+Sur ce diagramme de flux, nous pouvons voir que tout le monde accède à toute la base de données du site. En bleu, nous voyons les données qu'un utilisateur et censé pouvoir voir et en rouge, celles auxquelles seul l'administrateur doit pouvoir avoir accès.
+
 \subsection{Menaces}
+Comme présenter plus tôt, notre système manque d'un compte admin. Le risque et que n'importe qui (hackers compris) peut accèder au données des employés et des enseigne. Il pourrait même supprimer les enseignes vu que pour l'instant cette fonctionnalité est offerte à tout le monde via un simple onglet \textbf{Administration}.\\
+Voici une liste des menaces potentelles auxquelles notre site peut être confronté.
+\begin{itemize}
+
+\item Suppression/Ajout d'enseigne
+\begin{itemize}
+\item Source: Concurent, hacker, employé
+\item Motivations: Sabotage dans le cas d'un concurent ou d'un employé en colère. Amusement pour un hacker.
+\item Actifs visés: Les enseignes stockées dans la base de données.
+\item Potentialité: Forte
+\end{itemize}
+
+\item Vue des informations des employés
+\begin{itemize}
+\item Source:  Employé
+\item Motivations: Chantage à propos de salaire. Vol d'informations confidentielles. Spam de masse.
+\item Actifs visés: Les salaires stockés dans la bas de données.
+\item Potentialité: Forte
+\end{itemize}
+
+\item Changement du coût des locations
+\begin{itemize}
+\item Source: Concurent, hacker
+\item Motivations: Sabotage, perte de gain pour l'entreprise ciblée
+\item Actifs visés: Les coûts des enseignes dans la base de données
+\item Potentialité: Forte
+\end{itemize}
+
+\end{itemize}
+
+On voit très vite que le système mis en place actuellement est faible sécuritairement et donc fortement exposé aux menaces. L'analyse de ces dernières nous révèle que c'est la base de données en particulier qu'il faut protéger en parallèle de la connexion admin à implémenter.
+
 \subsection{Scénarios}
+Dans cette section nous présenterons certains scénarios probables au vu des menaces décrites plus tôt.
+
+\subsubsection{Sabotage du site web}
+Ce scénario va montrer deux des menaces précédemment citées.\\
+Bob, qui aime le troll sur internet, tombe sur la page du site. Après la page de choix du centre, il voit alors le bouton \textbf{Administration}. Il a alors accès à toute la gestion des enseignes sur le site. Il peut donc détruire tout ce qui a été mis en place au niveau des enseignes (suppression), mais aussi en ajouter à sa guise. Une attaque du genre, modification des produits plutôt que des enseignes, est survenue l'année passée sur le site d'un grand vendeur français. Nous avons dans ce cas une perte de crédibilité énorme pour le site selon le degré de changements apportés au site.\\
+Il peut aussi changer le prix de la location des magasins. Cela serait moins visible mais pourrait faire perdre une masse d'argent considérable si utilisé avec parcimonie (pas de chiffres abérant).
+
+\subsubsection{Vol d'informations des employés}
+Jean, employé en colère à cause de son salaire, se rend compte qu'il a accès à la partie \textbf{Administration} du site web de son employeur. Il y trouve toutes les informations à propos de ses collègues (salaire, adresse, ...). Il est donc en détention d'informations privées auxquelles il ne doit absolument pas avoir accès. Il pourrait utiliser cela pour faire du chantage auprès de son patron ou les divulguer pour ternir l'image de la boite.
+
+\subsection{Synthèse}
+Nous avons maintenant une bonne vue des problèmes sécuritaires et des menaces de notre système. Il va donc maintenant s'agir de l'améliorer pour le rendre comme ceci:\\
+\begin{center}
+ \includegraphics[width=200px]{img/systeme.png}
+\end{center}
+
+L'administrateur doit pouvoir accèder à toute la base de données et pouvoir la modifier, l'utilisateur ne doit pouvoir avoir accès qu'aux informations publiques (en bleu). Nous n'allons pas faire de compte entre deux avec un accès sur une partie des informatio  personnelles (compte employé par exemple).
+
 
 \section{Mesures sécuritaire}
 Dans cette partie, nous allons détailer les mesures sécuritaires entreprises.
