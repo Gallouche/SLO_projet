@@ -236,6 +236,14 @@ Le frontend a été développé en \textbf{Node.js} ce qui nous a grandement fac
 
 \texttt{json-web-token} nous a permis de facilement généré un token à partir d'un payload contenant les informations de l'utilisateur. Nous avons aussi ajouté un champ de date de création du token, et fixé une validité d'une heure. Enfin, le module nous a aussi permis de signer le token grâce à une \textit{secret phrase} stockée dans une variable d'environnement.
 
+\begin{lstlisting}{language=HTML,caption=Génération d'un token}
+return res.status(200).json(jwt.sign({
+	username: data.username,
+	exp: exp,
+	admin: data.admin
+}, config.jwt.secret_key));
+\end{lstlisting}
+
 \texttt{express-jwt} est un module permettant de demander une authentification pour accéder à une route de l'API. Une vérification de la signature sera faite et si cette dernière est valide, l'information de l'utilisateur contenue dans le token sera extraite. À partir de ces informations, nous pouvons savoir si l'utilisateur est un administrateur ou pas, et donc lui donner accès à la ressource ou pas.
 
 \subsection{Autres améliorations possibles}
