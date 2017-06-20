@@ -97,7 +97,7 @@
 \fancyhead[L]{\rightmark}
 \fancyhead[R]{ \raisebox{0.4cm}{\includegraphics[height=1.5cm,angle=-90]{img/logo-HEIG-VD.pdf}}}
 \fancyfoot[LO,RE]{\thepage}
-\fancyfoot[LE,RO]{Dispatcher -- Groupe \no 6}
+\fancyfoot[LE,RO]{SLO - Projet}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0pt}
 %%%%%%%
@@ -118,7 +118,7 @@
         \vspace{0.5cm}}
 
     \vspace{0.5cm}
-    {\itshape Gallandat Théo \\ Elisei Lucas \\ Truan David\par}
+    {\itshape Blanco Guillaume \\ Elisei Lucas \\ Gallandat Théo  \\ Truan David\par}
 
     \vspace{1cm}
     \textbf{Professeur}\par
@@ -141,9 +141,21 @@ Dans cette partie, nous allons analyser les menaces potentielles auxquelles notr
 \subsection{DFD}
 \subsection{Menaces}
 \subsection{Scénarios}
+
 \section{Mesures sécuritaire}
-\subsection{Mise en place d'un systeme admin}
-\subsection{Mise en place d'un SSL}
+Dans cette partie, nous allons détailer les mesures sécuritaires entreprises.
+\subsection{MySQL}
+\begin{itemize}
+\item Modification du nom et du mot de passe de l'utilisateur root.
+\item Création d'un autre administarteur de la base de donnée avec la philosophie du "moindre privilèges", en ne lui accordant que les commande INSERT, DELETE, SELECT, UPDATE.
+\item Supprimer les bases de données inutiles (i.e. "test") qui pourrait être des points d'entrées d'attaque.
+\item Désactiver "LOCAL INFILE" qui donne un accès au fichiers locaux pour éviter par exemple un affichage de donnée à l'aide d'un SELECT load_file(path).
+\end{itemize}
+
+\subsection{Frontend/Backend}
+\begin{itemize}
+\item 
+\end{itemize}
 \section{Conclusion}
 
 
