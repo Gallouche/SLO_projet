@@ -209,12 +209,26 @@ Dans cette partie, nous allons détailer les mesures sécuritaires entreprises.
 \item Modification du nom et du mot de passe de l'utilisateur root.
 \item Création d'un autre administarteur de la base de donnée avec la philosophie du "moindre privilèges", en ne lui accordant que les commande INSERT, DELETE, SELECT, UPDATE.
 \item Supprimer les bases de données inutiles (i.e. "test") qui pourrait être des points d'entrées d'attaque.
-\item Désactiver "LOCAL INFILE" qui donne un accès au fichiers locaux pour éviter par exemple un affichage de donnée à l'aide d'un SELECT load_file(path).
+\item Désactiver "LOCAL INFILE" qui donne un accès au fichiers locaux pour éviter par exemple un affichage de donnée à l'aide d'un SELECT load\_file(path).
+\item Création d'une table "utilisateurs" avec: 
+	\begin{itemize}
+	\item "user" : String, unique, not null
+	\item "hash" : not null
+	\item "salt" : not null
+	\item "admin" : boolean, true si admin et vérification lors d'une requete.
+	\end{itemize}
 \end{itemize}
 
 \subsection{Frontend/Backend}
 \begin{itemize}
-\item 
+\item Lors de requêtes à l'API, demander une authentification pour les routes administrations ("/admin").
+\item L'authentification se fait via des Json Web Token avec vérification par signature, grâce à une secrect phrase.
+\item Stocker la secret phrase dans une variable d'environement avec un nom non-explicite.
+\end{itemize}
+
+\subsection{Autres améliorations possibles}
+\begin{itemize}
+\item Mettre en place un SSL pour une connexion sécurisée. (avec let's encrypt par exemple qui fournit des certificats gratuit et open source).
 \end{itemize}
 \section{Conclusion}
 
